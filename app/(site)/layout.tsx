@@ -1,3 +1,4 @@
+import type { Viewport } from "next"
 import { MessageCircle } from "lucide-react"
 import { Header } from "@/components/site/header"
 import { Footer } from "@/components/site/footer"
@@ -6,12 +7,13 @@ import { getLang } from "@/lib/i18n"
 import { pick } from "@/lib/lang"
 
 export const dynamic = "force-dynamic"
+export const viewport: Viewport = { themeColor: "#04070a", colorScheme: "dark" }
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
   const [s, lang] = await Promise.all([getSettings(), getLang()])
   const wa = s.whatsapp.replace(/\D/g, "")
   return (
-    <>
+    <div className="hud-root">
       <Header lang={lang} phone={s.contact_phone} />
       <main className="min-h-[70vh]">{children}</main>
       <Footer lang={lang} s={s} />
@@ -25,6 +27,6 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
           <MessageCircle className="size-7" />
         </a>
       )}
-    </>
+    </div>
   )
 }

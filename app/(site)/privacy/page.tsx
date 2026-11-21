@@ -30,12 +30,13 @@ export default async function PrivacyPage() {
   ]
   return (
     <article className="mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-16">
-      <h1 className="font-display text-3xl font-semibold sm:text-4xl">{L("Politique de confidentialité", "Privacy policy")}</h1>
+      <p className="hud-eyebrow">{L("Vos données", "Your data")}</p>
+      <h1 className="font-display text-[clamp(1.15rem,4.6vw,2rem)]">{L("Politique de confidentialité", "Privacy policy")}</h1>
       <p className="mt-3 text-sm text-muted-foreground">{L("Dernière mise à jour : novembre 2026", "Last updated: November 2026")}</p>
       <div className="mt-8 space-y-8">
         {blocks.map(([h, p]) => (
           <section key={h}>
-            <h2 className="text-lg font-semibold">{h}</h2>
+            <h2 className="text-lg font-extrabold">{h}</h2>
             <p className="mt-2 text-muted-foreground">{p}</p>
           </section>
         ))}

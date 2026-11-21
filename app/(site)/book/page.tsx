@@ -29,7 +29,8 @@ export default async function BookPage({ searchParams }: { searchParams: Promise
   const initial = options.some((o) => o.id === session && o.left > 0) ? session : undefined
   return (
     <section className="mx-auto max-w-2xl px-4 py-12 sm:px-6 sm:py-16">
-      <h1 className="font-display text-3xl font-semibold sm:text-4xl">{L("Réserver un cours", "Book a course")}</h1>
+      <p className="hud-eyebrow">{L("Réservation", "Booking")}</p>
+      <h1 className="font-display text-[clamp(1.4rem,5vw,2.4rem)]">{L("Réserver un cours", "Book a course")}</h1>
       <p className="mt-3 text-muted-foreground">{L("Aucun paiement en ligne. Nous confirmons votre place par téléphone ou courriel.", "No online payment. We confirm your spot by phone or email.")}</p>
       <div className="mt-8">
         <BookingForm lang={lang} options={options} initial={initial} phone={s.contact_phone} />

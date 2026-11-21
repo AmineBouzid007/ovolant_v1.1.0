@@ -17,6 +17,9 @@
   --lime-ink: #07130a;
   --amber: #ffb224;
   --red: #ff5c61;
+  --ink: #e8eff7;
+  --sun: #ffb224;
+  --on-lime: #07130a;
 
   --background: var(--bg);
   --foreground: var(--text);
@@ -67,6 +70,10 @@
   --color-lime: var(--lime);
   --color-amber: var(--amber);
   --color-signal: var(--red);
+  --color-brand: var(--lime);
+  --color-ink: var(--ink);
+  --color-sun: var(--sun);
+  --color-on-lime: var(--on-lime);
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
@@ -140,4 +147,103 @@
   html { scroll-behavior: auto; }
   .gauge-needle, .gauge-arc { animation: none; }
   .btn { transition: none; }
+}
+
+/* =====================================================================
+   THEME C — "HUD cockpit": dark, neon lime, Unbounded display font, speedometer dial.
+   Only active on pages that render <div class="hud-root"> (the public site).
+   ===================================================================== */
+:root:has(.hud-root) {
+  color-scheme: dark;
+  --bg: #04070a;
+  --panel: #0a110e;
+  --panel-2: #111b16;
+  --line: #1c2d24;
+  --ink: #f1f7f2;          /* bright "ink": hover text, focus ring */
+  --text: #e6efe8;
+  --muted: #93aa9d;
+  --lime: #b6ff3c;         /* neon fill */
+  --green: #b6ff3c;        /* accent text */
+  --sun: #ffb800;
+  --amber: #ffc43a;
+  --red: #ff4d52;
+  --on-lime: #06140a;      /* dark text on a lime fill */
+  --primary-foreground: #04070a;
+  --destructive-foreground: #04070a;
+}
+
+/* Unlayered on purpose: Tailwind's font-display utility lives in a layer and would otherwise win. */
+.hud-root .font-display { font-family: 'Unbounded Variable', 'Unbounded', 'Sora Variable', system-ui, sans-serif; font-weight: 800; letter-spacing: -0.015em; text-transform: uppercase; line-height: 1.12; }
+
+@layer components {
+  .hud-root { position: relative; background: var(--bg); color: var(--text); }
+  .hud-root h1, .hud-root h2, .hud-root h3 { overflow-wrap: break-word; }
+
+  /* ---- buttons: sharp, glowing ---- */
+  .hud-root .btn { border-radius: 0.8rem; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 800; }
+  .hud-root .btn-lime { background: var(--lime); color: var(--on-lime); box-shadow: 0 0 0 1px rgba(182,255,60,.9), 0 0 26px -6px rgba(182,255,60,.65); }
+  .hud-root .btn-lime:hover { background: #caff6b; box-shadow: 0 0 0 1px #caff6b, 0 0 34px -4px rgba(182,255,60,.8); }
+  .hud-root .btn-lime svg.lucide-arrow-right { width: 1.6rem; height: 1.6rem; padding: 0.35rem; border-radius: 9999px; background: var(--on-lime); color: var(--lime); margin-right: -0.9rem; }
+  .hud-root .btn-ghost { background: rgba(182,255,60,.04); color: var(--text); border: 1.5px solid rgba(182,255,60,.4); }
+  .hud-root .btn-ghost:hover { background: rgba(182,255,60,.12); border-color: var(--lime); color: #fff; }
+
+  /* ---- panels with corner brackets ---- */
+  .hud-root .panel { position: relative; border-radius: 1rem; border-color: var(--line); background: linear-gradient(180deg, var(--panel), #070d0b); }
+  .hud-root .panel::before, .hud-root .panel::after { content: ""; position: absolute; width: 11px; height: 11px; pointer-events: none; border: 0 solid rgba(182,255,60,.7); }
+  .hud-root .panel::before { top: 7px; left: 7px; border-top-width: 1.5px; border-left-width: 1.5px; }
+  .hud-root .panel::after { bottom: 7px; right: 7px; border-bottom-width: 1.5px; border-right-width: 1.5px; }
+
+  .hud-band { background: linear-gradient(180deg, #070d0b, #050a08); border-block: 1px solid var(--line); }
+  .hud-eyebrow { display: inline-flex; align-items: center; gap: 0.6rem; margin-bottom: 0.9rem; font-size: 0.7rem; font-weight: 800; letter-spacing: 0.24em; text-transform: uppercase; color: var(--lime); }
+  .hud-eyebrow::before { content: ""; width: 1.6rem; height: 2px; background: var(--lime); box-shadow: 0 0 10px var(--lime); }
+  .hud-glowtext { color: var(--lime); text-shadow: 0 0 28px rgba(182,255,60,.45); }
+
+  /* ---- hero backdrop ---- */
+  .hud-grid {
+    position: absolute; inset: 0; pointer-events: none;
+    background-image: linear-gradient(rgba(182,255,60,.06) 1px, transparent 1px), linear-gradient(90deg, rgba(182,255,60,.06) 1px, transparent 1px);
+    background-size: 44px 44px;
+    -webkit-mask-image: radial-gradient(ellipse 75% 70% at 62% 38%, #000 25%, transparent 78%);
+    mask-image: radial-gradient(ellipse 75% 70% at 62% 38%, #000 25%, transparent 78%);
+  }
+  .hud-glow { position: absolute; pointer-events: none; border-radius: 9999px; background: radial-gradient(closest-side, rgba(182,255,60,.17), transparent 72%); }
+  .hud-floor { position: absolute; inset-inline: 0; bottom: 0; height: 15rem; overflow: hidden; pointer-events: none; -webkit-mask-image: linear-gradient(to top, #000 10%, transparent 95%); mask-image: linear-gradient(to top, #000 10%, transparent 95%); }
+  .hud-floor-plane {
+    position: absolute; left: -60%; right: -60%; top: 0; height: 260%;
+    background-image: linear-gradient(rgba(182,255,60,.35) 1px, transparent 1px), linear-gradient(90deg, rgba(182,255,60,.35) 1px, transparent 1px);
+    background-size: 64px 64px; transform-origin: 50% 0; will-change: transform;
+    animation: hud-floor 2.4s linear infinite;
+  }
+  @keyframes hud-floor { from { transform: perspective(340px) rotateX(72deg) translateY(0); } to { transform: perspective(340px) rotateX(72deg) translateY(64px); } }
+
+  /* ---- readout tiles ---- */
+  .hud-tile { position: relative; padding: 0.85rem 1.1rem; border: 1px solid var(--line); border-left: 3px solid var(--lime); border-radius: 0.6rem; background: rgba(10,17,14,.8); }
+  .hud-tile b { display: block; font-family: 'Unbounded Variable', 'Unbounded', system-ui, sans-serif; font-weight: 800; font-size: 1.55rem; line-height: 1; color: #fff; font-variant-numeric: tabular-nums; }
+  .hud-tile span { display: block; margin-top: 0.35rem; font-size: 0.68rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); }
+
+  /* ---- ticker (CSS only) ---- */
+  .hud-ticker { overflow: hidden; background: var(--lime); color: var(--on-lime); }
+  .hud-ticker-track { display: flex; width: max-content; animation: hud-marquee 34s linear infinite; }
+  .hud-ticker:hover .hud-ticker-track { animation-play-state: paused; }
+  @keyframes hud-marquee { to { transform: translateX(-50%); } }
+
+  /* ---- dial ---- */
+  .hud-needle { transform-box: view-box; transform-origin: 200px 200px; animation: needle-sweep 1.7s cubic-bezier(0.16, 0.84, 0.28, 1) 0.15s both; filter: drop-shadow(0 0 6px currentColor); }
+  .hud-seg { animation: seg-on 0.3s ease-out both; }
+  .hud-spin { transform-box: view-box; transform-origin: 200px 200px; animation: hud-rotate 80s linear infinite; }
+  .hud-mini-arc { animation: mini-arc 1.3s cubic-bezier(0.16, 0.84, 0.28, 1) 0.1s both; }
+  .hud-gauge-num { font: 700 11px 'Instrument Sans Variable', system-ui, sans-serif; font-variant-numeric: tabular-nums; fill: #8aa395; }
+  .hud-gauge-cap { font: 800 8.5px 'Instrument Sans Variable', system-ui, sans-serif; letter-spacing: 0.18em; text-transform: uppercase; fill: #6d8578; }
+  .hud-gauge-pct { font: 800 15px 'Unbounded Variable', 'Unbounded', system-ui, sans-serif; }
+  @keyframes seg-on { from { opacity: 0; } }
+  @keyframes hud-rotate { to { transform: rotate(360deg); } }
+  @keyframes mini-arc { from { stroke-dashoffset: 100; } }
+
+  /* ---- misc ---- */
+  .hud-map { filter: invert(92%) hue-rotate(180deg) saturate(0.55) contrast(0.92); }
+  .hud-root details[open] .faq-icon { transform: rotate(45deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hud-floor-plane, .hud-ticker-track, .hud-needle, .hud-seg, .hud-spin, .hud-mini-arc { animation: none; }
 }
