@@ -13,7 +13,6 @@ export default async function AdminLoginPage() {
   const lang = await getLang()
   return (
     <div className="relative isolate flex min-h-screen items-center justify-center overflow-hidden px-5">
-      <div className="road" aria-hidden="true" />
       <div className="relative w-full max-w-sm">
         <Image src="/brand/ovolant-logo.jpg" alt="Ovolant" width={447} height={447} className="mx-auto size-28 rounded-2xl bg-white object-contain" priority />
         <div className="mt-5 flex justify-center"><LangSwitch lang={lang} /></div>

@@ -5,14 +5,13 @@ import type { Lang } from "@/lib/lang"
 import { pick } from "@/lib/lang"
 import type { SiteSettings } from "@/lib/data/settings"
 
-const social = "flex size-11 items-center justify-center rounded-xl border border-line bg-panel2 transition-colors hover:border-brand hover:text-brand"
+const social = "flex size-11 items-center justify-center rounded-xl border border-line bg-white transition-colors hover:border-lime hover:text-lime"
 
 export function Footer({ lang, s }: { lang: Lang; s: SiteSettings }) {
   const L = pick(lang)
   const tel = s.contact_phone.replace(/[^\d+]/g, "")
   return (
-    <footer className="relative border-t border-line bg-[#050a08]">
-      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-brand to-transparent opacity-60" aria-hidden="true" />
+    <footer className="relative border-t border-line bg-panel">
       <div className="mx-auto grid max-w-6xl gap-8 px-4 py-10 sm:px-6 md:grid-cols-[1fr_auto]">
         <div className="space-y-3 text-sm text-muted-foreground">
           <div className="flex items-center gap-3">
@@ -23,9 +22,9 @@ export function Footer({ lang, s }: { lang: Lang; s: SiteSettings }) {
               <span className="signal-dot bg-signal" /><span className="signal-dot bg-sun" /><span className="signal-dot bg-brand" />
             </span>
           </div>
-          {s.contact_phone && <p className="flex items-center gap-2"><Phone className="size-4 text-brand" /><a href={`tel:${tel}`} className="hover:text-foreground">{s.contact_phone}</a></p>}
-          {s.contact_email && <p className="flex items-center gap-2"><Mail className="size-4 text-brand" /><a href={`mailto:${s.contact_email}`} className="hover:text-foreground">{s.contact_email}</a></p>}
-          {s.address && <p className="flex items-center gap-2"><MapPin className="size-4 text-brand" />{s.address}</p>}
+          {s.contact_phone && <p className="flex items-center gap-2"><Phone className="size-4 text-lime" /><a href={`tel:${tel}`} className="hover:text-foreground">{s.contact_phone}</a></p>}
+          {s.contact_email && <p className="flex items-center gap-2"><Mail className="size-4 text-lime" /><a href={`mailto:${s.contact_email}`} className="hover:text-foreground">{s.contact_email}</a></p>}
+          {s.address && <p className="flex items-center gap-2"><MapPin className="size-4 text-lime" />{s.address}</p>}
         </div>
         <div className="flex flex-col gap-3 text-sm md:items-end">
           <div className="flex gap-3">

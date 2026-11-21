@@ -4,13 +4,13 @@ import { Toaster as Sonner, type ToasterProps } from "sonner"
 
 const Toaster = (props: ToasterProps) => (
   <Sonner
-    theme="dark"
+    theme="light"
     className="toaster group"
     style={
       {
-        "--normal-bg": "#0d141d",
-        "--normal-text": "#e8eff7",
-        "--normal-border": "#213142",
+        "--normal-bg": "#ffffff",
+        "--normal-text": "#121a0c",
+        "--normal-border": "#d5ddc8",
       } as React.CSSProperties
     }
     {...props}

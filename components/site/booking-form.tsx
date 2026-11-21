@@ -48,7 +48,7 @@ export function BookingForm({ lang, options, initial, phone }: { lang: Lang; opt
         <div className="space-y-2">
           {options.map((o) => (
             <label key={o.id} className={cn("flex min-h-14 cursor-pointer items-center gap-3 rounded-xl border border-line bg-panel2 px-4 py-3 transition-colors hover:border-brand/50 has-[:checked]:border-brand has-[:checked]:bg-brand/10 has-[:checked]:ring-1 has-[:checked]:ring-brand", o.left === 0 && "cursor-not-allowed opacity-45")}>
-              <input type="radio" name="session" value={o.id} defaultChecked={selected === o.id} disabled={o.left === 0} className="size-4 accent-[#b6ff3c]" />
+              <input type="radio" name="session" value={o.id} defaultChecked={selected === o.id} disabled={o.left === 0} className="size-4 accent-[#3b7a0a]" />
               <span className="min-w-0 flex-1">
                 <span className="block font-medium">{o.title}</span>
                 <span className="block text-sm text-muted-foreground">{o.when}{o.sub ? ` · ${o.sub}` : ""}</span>
@@ -58,8 +58,8 @@ export function BookingForm({ lang, options, initial, phone }: { lang: Lang; opt
               </span>
             </label>
           ))}
-          <label className="flex min-h-14 cursor-pointer items-center gap-3 rounded-xl border border-dashed border-brand/40 px-4 py-3 transition-colors has-[:checked]:border-brand has-[:checked]:bg-brand/10 has-[:checked]:ring-1 has-[:checked]:ring-brand">
-            <input type="radio" name="session" value="other" defaultChecked={selected === "other"} className="size-4 accent-[#b6ff3c]" />
+          <label className="flex min-h-14 cursor-pointer items-center gap-3 rounded-xl border border-dashed border-lime/40 px-4 py-3 transition-colors has-[:checked]:border-brand has-[:checked]:bg-brand/10 has-[:checked]:ring-1 has-[:checked]:ring-brand">
+            <input type="radio" name="session" value="other" defaultChecked={selected === "other"} className="size-4 accent-[#3b7a0a]" />
             <span>
               <span className="block font-medium">{L("Une autre date", "Another date")}</span>
               <span className="block text-sm text-muted-foreground">{L("Indiquez vos disponibilités ci-dessous, nous vous appellerons.", "Tell us when you are free below and we will call you.")}</span>
@@ -96,10 +96,10 @@ export function BookingForm({ lang, options, initial, phone }: { lang: Lang; opt
 
       <div>
         <label className="flex cursor-pointer items-start gap-3 text-sm text-muted-foreground">
-          <input type="checkbox" name="consent" className="mt-0.5 size-5 shrink-0 accent-[#b6ff3c]" />
+          <input type="checkbox" name="consent" className="mt-0.5 size-5 shrink-0 accent-[#3b7a0a]" />
           <span>
             {L("J'accepte que mes renseignements soient utilisés pour traiter ma réservation, selon la ", "I agree that my information is used to process my booking, as described in the ")}
-            <Link href="/privacy" target="_blank" className="font-bold text-brand underline underline-offset-2">{L("politique de confidentialité", "privacy policy")}</Link>.
+            <Link href="/privacy" target="_blank" className="font-bold text-lime underline underline-offset-2">{L("politique de confidentialité", "privacy policy")}</Link>.
           </span>
         </label>
         {fe.consent && <p role="alert" className="mt-2 text-sm text-signal">{fe.consent}</p>}

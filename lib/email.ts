@@ -32,23 +32,23 @@ async function send(to: string, subject: string, html: string, replyTo?: string)
 }
 
 function shell(title: string, body: string, footer: string) {
-  return `<!doctype html><html><body style="margin:0;background:#070b11;padding:24px 12px;font-family:Arial,Helvetica,sans-serif;color:#e8eff7">
+  return `<!doctype html><html><body style="margin:0;background:#f4f7ee;padding:24px 12px;font-family:Arial,Helvetica,sans-serif;color:#121a0c">
 <table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center">
-<table role="presentation" width="100%" style="max-width:560px;background:#0d141d;border:1px solid #213142;border-radius:16px;overflow:hidden">
-<tr><td style="height:4px;background:#86e10a"></td></tr>
-<tr><td style="padding:28px 28px 8px"><div style="font-size:13px;color:#86e10a;font-weight:bold;letter-spacing:.3px">OVOLANT · École de conduite</div>
-<h1 style="margin:14px 0 0;font-size:22px;line-height:1.25;color:#fff">${esc(title)}</h1></td></tr>
-<tr><td style="padding:12px 28px 28px;font-size:15px;line-height:1.6;color:#c6d3e0">${body}</td></tr>
-<tr><td style="padding:16px 28px;border-top:1px solid #213142;font-size:12px;color:#8a9db1">${footer}</td></tr>
+<table role="presentation" width="100%" style="max-width:560px;background:#ffffff;border:1px solid #d5ddc8;border-radius:16px;overflow:hidden">
+<tr><td style="height:4px;background:#92f52b"></td></tr>
+<tr><td style="padding:28px 28px 8px"><div style="font-size:13px;color:#3b7a0a;font-weight:bold;letter-spacing:.3px">OVOLANT · École de conduite</div>
+<h1 style="margin:14px 0 0;font-size:22px;line-height:1.25;color:#121a0c">${esc(title)}</h1></td></tr>
+<tr><td style="padding:12px 28px 28px;font-size:15px;line-height:1.6;color:#2b3622">${body}</td></tr>
+<tr><td style="padding:16px 28px;border-top:1px solid #d5ddc8;font-size:12px;color:#56624b">${footer}</td></tr>
 </table></td></tr></table></body></html>`
 }
 
 function details(rows: [string, string][]) {
-  return `<table role="presentation" width="100%" style="margin:16px 0;border:1px solid #213142;border-radius:12px;background:#131d29">${rows
+  return `<table role="presentation" width="100%" style="margin:16px 0;border:1px solid #d5ddc8;border-radius:12px;background:#f4f7ee">${rows
     .filter(([, v]) => v)
     .map(
       ([k, v]) =>
-        `<tr><td style="padding:10px 14px;font-size:13px;color:#8a9db1;width:38%;vertical-align:top">${esc(k)}</td><td style="padding:10px 14px;font-size:14px;color:#fff">${esc(v)}</td></tr>`,
+        `<tr><td style="padding:10px 14px;font-size:13px;color:#56624b;width:38%;vertical-align:top">${esc(k)}</td><td style="padding:10px 14px;font-size:14px;color:#121a0c">${esc(v)}</td></tr>`,
     )
     .join("")}</table>`
 }
@@ -111,7 +111,7 @@ export async function sendBookingToSchool(b: BookingMail) {
       ["Notes", b.notes],
       ["Langue / Language", b.lang === "fr" ? "Français" : "English"],
     ]) +
-      `<p style="margin:0"><a href="${esc((process.env.NEXT_PUBLIC_SITE_URL || "") + "/admin/bookings")}" style="color:#86e10a">Ouvrir le tableau de bord / Open dashboard</a></p>`,
+      `<p style="margin:0"><a href="${esc((process.env.NEXT_PUBLIC_SITE_URL || "") + "/admin/bookings")}" style="color:#3b7a0a">Ouvrir le tableau de bord / Open dashboard</a></p>`,
     "Ovolant",
   )
   await send(to, `Nouvelle réservation — ${b.name}`, html, b.email)

@@ -26,7 +26,7 @@ function ItemFields({ kind, item, lang }: { kind: string; item?: ContentItem; la
         <div><label className={labelCls}>{isI ? L("Présentation (français)", "Bio (French)") : L("Avis (français)", "Review (French)")}</label><textarea name="text_fr" rows={3} defaultValue={item?.text_fr} className={inputCls} /></div>
         <div><label className={labelCls}>{isI ? L("Présentation (anglais)", "Bio (English)") : L("Avis (anglais)", "Review (English)")}</label><textarea name="text_en" rows={3} defaultValue={item?.text_en} className={inputCls} /></div>
       </div>
-      <label className="mt-4 flex min-h-11 cursor-pointer items-center gap-3 text-sm"><input type="checkbox" name="published" defaultChecked={item?.published ?? true} className="size-5 accent-[#86e10a]" />{L("Visible sur le site", "Visible on the site")}</label>
+      <label className="mt-4 flex min-h-11 cursor-pointer items-center gap-3 text-sm"><input type="checkbox" name="published" defaultChecked={item?.published ?? true} className="size-5 accent-[#3b7a0a]" />{L("Visible sur le site", "Visible on the site")}</label>
     </>
   )
 }

@@ -28,7 +28,7 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export const viewport: Viewport = { themeColor: "#070b11", width: "device-width", initialScale: 1 }
+export const viewport: Viewport = { themeColor: "#ffffff", width: "device-width", initialScale: 1 }
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const lang = await getLang()
@@ -36,7 +36,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang={lang}>
       <body>
         {children}
-        <Toaster position="top-center" theme="dark" />
+        <Toaster position="top-center" theme="light" />
         <Analytics />
       </body>
     </html>

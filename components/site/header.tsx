@@ -17,7 +17,7 @@ export function Header({ lang, phone }: { lang: Lang; phone: string }) {
   ]
   return (
     <header className="sticky top-0 z-40 px-3 pt-3 sm:px-6">
-      <div className="relative mx-auto flex h-16 max-w-6xl items-center gap-2 rounded-2xl border border-line bg-[rgba(6,10,8,0.94)] pl-2.5 pr-2 shadow-[0_0_0_1px_rgba(182,255,60,0.05),0_10px_30px_-12px_rgba(0,0,0,0.8)] sm:gap-3 sm:pl-3">
+      <div className="relative mx-auto flex h-16 max-w-6xl items-center gap-2 rounded-2xl border border-line bg-white pl-2.5 pr-2 sm:gap-3 sm:pl-3">
         <Link href="/" aria-label="Ovolant" className="mr-auto flex items-center">
           <span className="flex size-11 items-center justify-center overflow-hidden rounded-xl bg-white">
             <Image src="/brand/ovolant-logo.jpg" alt="Ovolant — École de conduite" width={447} height={447} priority className="size-10 object-contain" />

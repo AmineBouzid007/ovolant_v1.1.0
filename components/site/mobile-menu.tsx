@@ -18,7 +18,7 @@ export function MobileMenu({ links, label, children }: { links: { href: string; 
         {open ? <X className="size-5" /> : <Menu className="size-5" />}
       </button>
       {open && (
-        <div className="absolute inset-x-0 top-[calc(100%+8px)] rounded-2xl border border-line bg-[#070d0b] p-4 shadow-[0_20px_40px_-10px_rgba(0,0,0,0.9)]">
+        <div className="absolute inset-x-0 top-[calc(100%+8px)] rounded-2xl border border-line bg-white p-4">
           <nav className="flex flex-col">
             {links.map((l) => (
               <Link key={l.href} href={l.href} onClick={() => setOpen(false)} className="border-b border-line py-4 text-sm font-extrabold uppercase tracking-[0.14em] last:border-0">

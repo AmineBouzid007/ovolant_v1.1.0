@@ -31,7 +31,7 @@ export function SessionForm({ lang, d }: { lang: Lang; d: SessionDefaults }) {
         <div className="sm:col-span-2"><label className={labelCls} htmlFor="price">{L("Prix en CAD (facultatif)", "Price in CAD (optional)")}</label><input id="price" name="price" inputMode="decimal" defaultValue={d.price} placeholder="0.00" className={inputCls} /></div>
       </div>
       <label className="flex min-h-11 cursor-pointer items-center gap-3 text-sm">
-        <input type="checkbox" name="published" defaultChecked={d.published} className="size-5 accent-[#86e10a]" />
+        <input type="checkbox" name="published" defaultChecked={d.published} className="size-5 accent-[#3b7a0a]" />
         {L("Visible sur le site", "Visible on the site")}
       </label>
       <div className="flex flex-wrap gap-3">

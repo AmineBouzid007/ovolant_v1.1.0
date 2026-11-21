@@ -29,14 +29,14 @@ export function SessionList({ sessions, lang }: { sessions: SessionRow[]; lang: 
           <li key={s.id} className="panel grid grid-cols-[auto_1fr] items-center gap-x-4 gap-y-4 p-4 sm:grid-cols-[auto_1fr_auto] sm:p-5">
             <MiniDial pct={s.booked / Math.max(1, s.seats)} tone={tone}>
               <span className="text-[0.55rem] font-extrabold uppercase leading-none tracking-wider text-muted-foreground">{fmtWeekday(s.starts_at, lang)}</span>
-              <span className="font-display my-0.5 text-xl leading-none text-white">{fmtDay(s.starts_at, lang)}</span>
+              <span className="font-display my-0.5 text-xl leading-none text-foreground">{fmtDay(s.starts_at, lang)}</span>
               <span className="text-[0.55rem] font-extrabold uppercase leading-none tracking-wider" style={{ color: TONE_HEX[tone] }}>{fmtMonth(s.starts_at, lang)}</span>
             </MiniDial>
             <div className="min-w-0">
               <h3 className="text-base font-extrabold sm:text-lg">{title}</h3>
               <p className="mt-1 flex flex-wrap items-center gap-x-4 gap-y-1 text-sm font-semibold text-muted-foreground">
-                <span className="inline-flex items-center gap-1.5"><Clock className="size-3.5 text-brand" />{fmtTime(s.starts_at, lang)} – {fmtTime(end, lang)}</span>
-                {s.location && <span className="inline-flex items-center gap-1.5"><MapPin className="size-3.5 text-brand" />{s.location}</span>}
+                <span className="inline-flex items-center gap-1.5"><Clock className="size-3.5 text-lime" />{fmtTime(s.starts_at, lang)} – {fmtTime(end, lang)}</span>
+                {s.location && <span className="inline-flex items-center gap-1.5"><MapPin className="size-3.5 text-lime" />{s.location}</span>}
                 {s.price_cents != null && <span className="font-extrabold text-foreground">{fmtPrice(s.price_cents, lang)}</span>}
               </p>
               {desc && <p className="mt-2 line-clamp-2 text-sm text-muted-foreground">{desc}</p>}

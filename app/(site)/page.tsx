@@ -68,18 +68,15 @@ export default async function HomePage() {
 
       {/* ---------- hero ---------- */}
       <section className="relative isolate overflow-hidden">
-        <div className="hud-grid" aria-hidden="true" />
-        <div className="hud-glow right-[-10%] top-[8%] size-[46rem] max-w-none" aria-hidden="true" />
-        <div className="hud-floor" aria-hidden="true"><div className="hud-floor-plane" /></div>
         <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-4 pb-24 pt-12 sm:px-6 md:pt-20 lg:grid-cols-[1.05fr_1fr]">
           <div>
-            <p className="inline-flex items-center gap-2.5 rounded-lg border border-line bg-panel/80 px-3.5 py-2 text-[0.68rem] font-extrabold uppercase tracking-[0.2em]">
+            <p className="inline-flex items-center gap-2.5 rounded-lg border border-line bg-panel px-3.5 py-2 text-[0.68rem] font-extrabold uppercase tracking-[0.2em]">
               <span className="inline-flex gap-1" aria-hidden="true"><span className="signal-dot bg-signal" /><span className="signal-dot bg-sun" /><span className="signal-dot bg-brand" /></span>
               {L("École de conduite · Montréal", "Driving school · Montréal")}
             </p>
             <h1 className="font-display mt-6 text-[clamp(1.5rem,4.5vw,3rem)] leading-[1.1]">
               {L("Prenez le volant ", "Take the wheel ")}
-              <span className="hud-glowtext">{L("en toute confiance.", "with confidence.")}</span>
+              <span className="hud-accent">{L("en toute confiance.", "with confidence.")}</span>
             </h1>
             <p className="mt-6 max-w-xl text-lg font-semibold text-muted-foreground">
               {L("Choisissez votre prochain cours et réservez votre place en ligne, en deux minutes.", "Choose your next course and book your spot online, in two minutes.")}
@@ -101,8 +98,8 @@ export default async function HomePage() {
               {next ? (
                 <>
                   <span className="text-[0.62rem] font-extrabold uppercase tracking-[0.18em] text-muted-foreground">{L("Prochain cours", "Next course")}</span>
-                  <span className="font-display mt-1.5 text-[clamp(2rem,9vw,3rem)] leading-none text-white">{fmtDay(next.starts_at, lang)}</span>
-                  <span className="mt-1 text-xs font-extrabold uppercase tracking-[0.18em] text-white/80">{fmtWeekday(next.starts_at, lang)} · {fmtMonth(next.starts_at, lang)}</span>
+                  <span className="font-display mt-1.5 text-[clamp(2rem,9vw,3rem)] leading-none text-foreground">{fmtDay(next.starts_at, lang)}</span>
+                  <span className="mt-1 text-xs font-extrabold uppercase tracking-[0.18em] text-muted-foreground">{fmtWeekday(next.starts_at, lang)} · {fmtMonth(next.starts_at, lang)}</span>
                   <span className="mt-2 text-[0.8rem] font-extrabold uppercase tracking-wider" style={{ color: TONE_HEX[tone] }}>
                     {left === 0 ? L("Complet", "Full") : left === 1 ? L("1 place", "1 spot") : L(`${left} places`, `${left} spots`)}
                   </span>
@@ -173,7 +170,7 @@ export default async function HomePage() {
               [L("Nous confirmons", "We confirm"), L("Nous vous contactons et vous recevez un courriel de confirmation.", "We contact you and you receive a confirmation email.")],
             ].map(([t, d], i) => (
               <li key={i} className="panel relative overflow-hidden p-7">
-                <span className="font-display text-6xl text-transparent [-webkit-text-stroke:1.5px_var(--lime)]" aria-hidden="true">0{i + 1}</span>
+                <span className="font-display text-6xl text-lime" aria-hidden="true">0{i + 1}</span>
                 <h3 className="mt-5 text-lg font-extrabold">{t}</h3>
                 <p className="mt-2 text-muted-foreground">{d}</p>
               </li>
@@ -230,7 +227,7 @@ export default async function HomePage() {
             <details key={q} className="group px-6">
               <summary className="flex min-h-16 cursor-pointer items-center justify-between gap-4 py-4 font-extrabold">
                 {q}
-                <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-panel2 text-brand"><Plus className="faq-icon size-4 transition-transform" /></span>
+                <span className="flex size-8 shrink-0 items-center justify-center rounded-lg bg-white text-lime"><Plus className="faq-icon size-4 transition-transform" /></span>
               </summary>
               <p className="pb-6 text-muted-foreground">{a}</p>
             </details>
@@ -259,7 +256,7 @@ export default async function HomePage() {
                 title={L("Carte", "Map")}
                 src={`https://www.google.com/maps?q=${encodeURIComponent(s.address)}&output=embed`}
                 loading="lazy" referrerPolicy="no-referrer-when-downgrade"
-                className="hud-map h-full min-h-72 w-full border-0"
+                className="h-full min-h-72 w-full border-0"
               />
             </div>
           )}
