@@ -12,6 +12,7 @@ export function Header({ lang, phone }: { lang: Lang; phone: string }) {
   const links = [
     { href: "/#cours", label: L("Prochains cours", "Upcoming courses") },
     { href: "/#comment", label: L("Comment réserver", "How to book") },
+    { href: "/about", label: L("À propos", "About") },
     { href: "/#faq", label: "FAQ" },
     { href: "/#contact", label: "Contact" },
   ]
