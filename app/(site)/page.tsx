@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowRight, Mail, MapPin, Phone, Plus } from "lucide-react"
+import { ArrowRight, BadgeCheck, CalendarDays, Mail, MapPin, Phone, Plus, UserRound } from "lucide-react"
 import { Gauge, TONE_HEX, type Tone } from "@/components/site/gauge"
 import { SessionList, seatTone } from "@/components/site/session-list"
 import { getSettings } from "@/lib/data/settings"
@@ -68,7 +68,7 @@ export default async function HomePage() {
 
       {/* ---------- hero ---------- */}
       <section className="relative isolate overflow-hidden">
-        <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-4 pb-24 pt-12 sm:px-6 md:pt-20 lg:grid-cols-[1.05fr_1fr]">
+        <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-4 pb-20 pt-10 sm:px-6 md:pt-16 lg:grid-cols-[1.05fr_1fr]">
           <div>
             <p className="inline-flex items-center gap-2.5 rounded-lg border border-line bg-panel px-3.5 py-2 text-[0.68rem] font-extrabold uppercase tracking-[0.2em]">
               <span className="inline-flex gap-1" aria-hidden="true"><span className="signal-dot bg-signal" /><span className="signal-dot bg-sun" /><span className="signal-dot bg-brand" /></span>
@@ -85,8 +85,22 @@ export default async function HomePage() {
               <Link href="/book" className="btn btn-lime h-14 pl-7 pr-6 text-sm">{L("Réserver un cours", "Book a course")}<ArrowRight /></Link>
               {s.contact_phone && <a href={`tel:${tel}`} className="btn btn-ghost h-14 text-sm"><Phone className="size-4" />{s.contact_phone}</a>}
             </div>
+            <ul className="mt-10 flex flex-wrap gap-2.5" aria-label={L("Nos atouts", "Why us")}>
+              {[
+                [BadgeCheck, L("Réservation gratuite", "Free to book")],
+                [UserRound, L("Sans compte à créer", "No account needed")],
+                [Mail, L("Confirmation par courriel", "Email confirmation")],
+              ].map(([Icon, label]) => {
+                const I = Icon as typeof MapPin
+                return (
+                  <li key={label as string} className="inline-flex items-center gap-2 rounded-full border border-line bg-white px-4 py-2 text-sm font-bold">
+                    <I className="size-4 text-lime" aria-hidden="true" />{label as string}
+                  </li>
+                )
+              })}
+            </ul>
             {sessions.length > 0 && (
-              <ul className="mt-10 flex flex-wrap gap-3">
+              <ul className="mt-5 flex flex-wrap gap-3">
                 <li className="hud-tile"><b>{String(sessions.length).padStart(2, "0")}</b><span>{sessions.length === 1 ? L("cours à venir", "upcoming course") : L("cours à venir", "upcoming courses")}</span></li>
                 <li className="hud-tile"><b>{String(totalLeft).padStart(2, "0")}</b><span>{L("places disponibles", "spots available")}</span></li>
               </ul>
@@ -137,10 +151,14 @@ export default async function HomePage() {
             {sessions.length ? (
               <SessionList sessions={sessions} lang={lang} />
             ) : (
-              <div className="panel p-10 text-center text-muted-foreground">
-                <p className="text-lg font-extrabold text-foreground">{L("Les prochaines dates seront annoncées bientôt.", "Upcoming dates will be announced soon.")}</p>
+              <div className="panel flex flex-col items-center p-10 text-center text-muted-foreground">
+                <span className={`${iconBox} size-14 rounded-2xl`}><CalendarDays className="size-6" aria-hidden="true" /></span>
+                <p className="mt-5 text-lg font-extrabold text-foreground">{L("Les prochaines dates seront annoncées bientôt.", "Upcoming dates will be announced soon.")}</p>
                 <p className="mt-2 text-sm">{L("Vous pouvez déjà nous envoyer une demande.", "You can already send us a request.")}</p>
-                <Link href="/book" className="btn btn-lime mt-6">{L("Envoyer une demande", "Send a request")}</Link>
+                <div className="mt-6 flex flex-wrap justify-center gap-3">
+                  <Link href="/book" className="btn btn-lime">{L("Envoyer une demande", "Send a request")}</Link>
+                  {s.contact_phone && <a href={`tel:${tel}`} className="btn btn-ghost"><Phone className="size-4" />{s.contact_phone}</a>}
+                </div>
               </div>
             )}
           </div>
@@ -168,13 +186,19 @@ export default async function HomePage() {
               [L("Choisissez une date", "Pick a date"), L("Parcourez les prochains cours et leurs places restantes.", "Browse the upcoming courses and the spots left.")],
               [L("Laissez vos coordonnées", "Leave your details"), L("Nom, téléphone et courriel. Pas de compte à créer.", "Name, phone and email. No account to create.")],
               [L("Nous confirmons", "We confirm"), L("Nous vous contactons et vous recevez un courriel de confirmation.", "We contact you and you receive a confirmation email.")],
-            ].map(([t, d], i) => (
-              <li key={i} className="panel relative overflow-hidden p-7">
-                <span className="font-display text-6xl text-lime" aria-hidden="true">0{i + 1}</span>
+            ].map(([t, d], i) => {
+              const Icon = [CalendarDays, UserRound, BadgeCheck][i]
+              return (
+              <li key={i} className="panel reveal relative overflow-hidden p-7 transition-colors hover:border-lime">
+                <div className="flex items-center justify-between">
+                  <span className={`${iconBox} size-12 rounded-xl`}><Icon className="size-5" aria-hidden="true" /></span>
+                  <span className="font-display text-4xl text-line" aria-hidden="true">0{i + 1}</span>
+                </div>
                 <h3 className="mt-5 text-lg font-extrabold">{t}</h3>
                 <p className="mt-2 text-muted-foreground">{d}</p>
               </li>
-            ))}
+              )
+            })}
           </ol>
         </div>
       </section>
@@ -186,7 +210,7 @@ export default async function HomePage() {
           <h2 className={h2}>{L("Nos instructeurs", "Our instructors")}</h2>
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {instructors.map((i) => (
-              <article key={i.id} className="panel p-7">
+              <article key={i.id} className="panel reveal p-7">
                 <div className="font-display flex size-14 items-center justify-center rounded-xl bg-brand text-xl text-on-lime">{i.name.charAt(0)}</div>
                 <h3 className="mt-5 text-lg font-extrabold">{i.name}</h3>
                 <p className="text-sm font-bold text-lime">{lang === "fr" ? i.role_fr : i.role_en || i.role_fr}</p>
@@ -205,7 +229,7 @@ export default async function HomePage() {
             <h2 className={h2}>{L("Ce que disent nos élèves", "What our students say")}</h2>
             <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
               {testimonials.map((t) => (
-                <figure key={t.id} className="panel p-7">
+                <figure key={t.id} className="panel reveal p-7">
                   <blockquote className="text-lg font-bold leading-snug">« {lang === "fr" ? t.text_fr : t.text_en || t.text_fr} »</blockquote>
                   <figcaption className="mt-5 text-sm text-muted-foreground">
                     <span className="font-extrabold text-foreground">{t.name}</span>
@@ -219,10 +243,14 @@ export default async function HomePage() {
       )}
 
       {/* ---------- FAQ (native <details>: zero JS) ---------- */}
-      <section id="faq" className="mx-auto max-w-3xl px-4 py-20 sm:px-6">
-        <p className="hud-eyebrow">{L("Questions fréquentes", "Common questions")}</p>
-        <h2 className={h2}>FAQ</h2>
-        <div className="panel mt-10 divide-y divide-line overflow-hidden">
+      <section id="faq" className="mx-auto grid max-w-6xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[0.8fr_1.4fr] lg:gap-16">
+        <div className="lg:sticky lg:top-28 lg:self-start">
+          <p className="hud-eyebrow">{L("Questions fréquentes", "Common questions")}</p>
+          <h2 className={h2}>FAQ</h2>
+          <p className="mt-3 max-w-sm font-semibold text-muted-foreground">{L("Une autre question ? Appelez-nous, nous répondons avec plaisir.", "Another question? Call us, we are happy to help.")}</p>
+          {s.contact_phone && <a href={`tel:${tel}`} className="btn btn-ghost mt-6"><Phone className="size-4" />{s.contact_phone}</a>}
+        </div>
+        <div className="panel divide-y divide-line overflow-hidden self-start">
           {faqs.map(([q, a]) => (
             <details key={q} className="group px-6">
               <summary className="flex min-h-16 cursor-pointer items-center justify-between gap-4 py-4 font-extrabold">

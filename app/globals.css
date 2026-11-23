@@ -152,7 +152,14 @@
   .hud-root details[open] .faq-icon, details[open] .faq-icon { transform: rotate(45deg); }
 }
 
+/* Scroll reveal: pure CSS, only in browsers that support scroll-driven animations */
+@supports (animation-timeline: view()) {
+  .reveal { animation: reveal-in linear both; animation-timeline: view(); animation-range: entry 0% entry 30%; }
+  @keyframes reveal-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  .reveal { animation: none; }
   html { scroll-behavior: auto; }
   .hud-ticker-track, .hud-needle, .hud-arc { animation: none; }
   .btn { transition: none; }
